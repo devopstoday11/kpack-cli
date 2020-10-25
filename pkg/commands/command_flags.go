@@ -12,6 +12,11 @@ func SetTLSFlags(cmd *cobra.Command, cfg *registry.TLSConfig) {
 }
 
 func SetDryRunOutputFlags(cmd *cobra.Command) {
-	cmd.Flags().Bool(DryRunFlag, false, "only print the object that would be sent, without sending it")
+	cmd.Flags().Bool(DryRunFlag, false, "perform client-side validation with no side-effects")
 	cmd.Flags().String(OutputFlag, "", "output format. supported formats are: yaml, json")
+}
+
+func SetImgUploadDryRunOutputFlags(cmd *cobra.Command) {
+	SetDryRunOutputFlags(cmd)
+	cmd.Flags().Bool(DryRunImgUploadFlag, false, "similar to --dry-run, but will upload images to registry (when required)")
 }
